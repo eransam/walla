@@ -5,6 +5,7 @@ import notify from "../../../service/NotifyService";
 import urlService from "../../../service/urlService";
 import "./AddUrl.css";
 import companyLogo from '../../../assets/img/Walla_new.svg.png';
+import {BrowserRouter as Router, Link} from 'react-router-dom';
 
 
 function AddUrl(): JSX.Element {
@@ -13,11 +14,19 @@ function AddUrl(): JSX.Element {
 
     const navigate = useNavigate();
 
+    function navToLink() {
+
+        
+    }
+    function Browse(url: any) {
+        window.location.href = `${url}`; 
+    }
+
+    var resData:any =""
     async function submit(url: UrlModel) {
         try {
             console.log("theurl in submit: " ,url);
-            
-            const resData = await urlService.addurl(url);
+            resData = await urlService.addurl(url);
             console.log("resData in addUrl: " , resData.type);
             const theInp = document.getElementById("inp");
             const errorDiv = document.querySelector(".error");
@@ -37,8 +46,7 @@ function AddUrl(): JSX.Element {
                  linkWrapper.style.display = "flex";
                 theInp.style.border = "2px solid red";
                 console.log("resData.type.message: " ,resData.type.message);
-                
-                shortenedLink.textContent = resData.message;
+                shortenedLink.innerHTML = `<a href="${resData.message}" target="_blank">${resData.message}</a>`;
             
             
             // notify.success("product has been added!");
@@ -51,6 +59,8 @@ function AddUrl(): JSX.Element {
         }
     }
 
+    console.log("resData: ",resData);
+    
     return (
         //  <div className="AddProduct Box">
         <main>
@@ -74,7 +84,10 @@ function AddUrl(): JSX.Element {
                     <h3 className="link-text">Shortened Link</h3>
                     <div id="short-link" className="short-link"></div>
                 </div>
-    </div>
+                    <div>
+                        
+                    </div>
+            </div>
      </main>
     );
 }

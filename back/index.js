@@ -6,6 +6,7 @@ import { nanoid } from "nanoid";
 import urlExist from "url-exist";
 import URL from "./models/urlModel.js";
 import cors from "cors";
+import { log } from "console";
 
 
 const __dirname = path.resolve();
@@ -36,29 +37,53 @@ const validateURL = async (req, res, next) => {
   next();
 };
 
+async function getAllUrl(){
+    return URL.find()
+}
+
 //localhost:8000 מביא את הדף הראשי ב
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 
 
-
-app.post("/link", validateURL, (req, res) => {
+app.post("/link", validateURL,async (req, res) => {
 console.log("test");
     console.log("req.body: " ,req.body);
   const { url } = req.body;
+  const allUrls = await getAllUrl();
+    if (url.startsWith("http://localhost:8000/")) {
+        const isUrlShort = url.slice(22);
+        console.log("isUrlShort: " ,isUrlShort);
+        for (const iterator of allUrls) {
+            if (iterator.id === isUrlShort) {
+                const realUrl = iterator.url
+                res.json({ message: realUrl, type: "success" });                
+            }
 
-  // Generate a unique id to identify the url in the database
+            
+        }
+
+
+    }else{
+    // Generate a unique id to identify the url in the database
   let id = nanoid(7);
 
   let newURL = new URL({ url, id });
   try {
+
     newURL.save();
   } catch (err) {
     res.send("An error was encountered! Please try again.");
   }
   // Send the server address with the unique id
   res.json({ message: `http://localhost:8000/${newURL.id}`, type: "success" });
+
+    }
+
+
+
+
 });
 
 
