@@ -14,6 +14,7 @@ const handleSubmit = async () => {
     method: "POST",
     body: JSON.stringify({ url }),
   }).then((response) => response.json());
+  
 
   if (response.type == "failure") {
     input.style.border = "2px solid red";

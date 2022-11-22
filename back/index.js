@@ -36,9 +36,12 @@ const validateURL = async (req, res, next) => {
   next();
 };
 
+// מביא את הדף הראשי
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
+
+
 
 app.post("/link", validateURL, (req, res) => {
 console.log("test");
@@ -57,6 +60,8 @@ console.log("test");
   // Send the server address with the unique id
   res.json({ message: `http://localhost:8000/${newURL.id}`, type: "success" });
 });
+
+
 
 app.get("/:id", async (req, res) => {
   const id = req.params.id;

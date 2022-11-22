@@ -15,13 +15,35 @@ function AddUrl(): JSX.Element {
         try {
             console.log("theurl in submit: " ,url);
             
-            await urlService.addurl(url);
+            const resData = await urlService.addurl(url);
+            console.log("resData in addUrl: " , resData.type);
+            const theInp = document.getElementById("inp");
+            const errorDiv = document.querySelector(".error");
+            const linkWrapper = document.getElementById("link-wrapper");
+            const shortenedLink = document.getElementById("short-link");
+
+            if (resData.type == "failure") {
+                theInp.style.border = "2px solid red";
+                errorDiv.textContent = `please try another one!`;
+                console.log("linkWrapper: " ,linkWrapper);
+                
+
+              }
+              if (resData.type == "success") {
+                 linkWrapper.style.opacity= "1"
+                 linkWrapper.style.scale = "1";
+                 linkWrapper.style.display = "flex";
+                theInp.style.border = "2px solid red";
+                console.log("resData.type.message: " ,resData.type.message);
+                
+                shortenedLink.textContent = resData.message;
             
-            notify.success("product has been added!");
+            
+            // notify.success("product has been added!");
 
             
-            navigate("/ProductList");
-        }
+            // navigate("/ProductList");
+        }}
         catch (err: any) {
             notify.error(err);
         }
@@ -34,21 +56,18 @@ function AddUrl(): JSX.Element {
         <div className="header">URL SH.RTNE.</div>
         
                         <form className="form" id="form" onSubmit={handleSubmit(submit)}>
-
-                            <h2>Add product</h2>
-
-                            <label>url: </label>
-                            <input type="text" {...register("url", {
+                            {/* <label>url: </label> */}
+                            <input type="text" id="inp" {...register("url", {
                                 required: { value: true, message: "Missing url " }
                             })} />
                             <span>{formState.errors.url?.message}</span>
-
+                            <div className="error"></div>
                             <button className="btn">Go!</button>
                             {/* <button onClick={() => navigate(-1)}>Back</button> */}
                         </form>
-                <div className="link-wrapper">
+                <div id="link-wrapper" className="link-wrapper">
                     <h3 className="link-text">Shortened Link</h3>
-                    <div className="short-link"></div>
+                    <div id="short-link" className="short-link"></div>
                 </div>
     </div>
      </main>
