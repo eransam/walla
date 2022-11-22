@@ -4,6 +4,8 @@ import UrlModel from "../../../Models/UrlModel";
 import notify from "../../../service/NotifyService";
 import urlService from "../../../service/urlService";
 import "./AddUrl.css";
+import companyLogo from '../../../assets/img/Walla_new.svg.png';
+
 
 function AddUrl(): JSX.Element {
 
@@ -52,8 +54,11 @@ function AddUrl(): JSX.Element {
     return (
         //  <div className="AddProduct Box">
         <main>
+            <div className="logoImg">
+            <img src={companyLogo} alt="" width="300" height="150"/>
+            </div>
       <div className="container">
-        <div className="header">URL SH.RTNE.</div>
+        <div className="header">Walla URL shortener</div>
         
                         <form className="form" id="form" onSubmit={handleSubmit(submit)}>
                             {/* <label>url: </label> */}

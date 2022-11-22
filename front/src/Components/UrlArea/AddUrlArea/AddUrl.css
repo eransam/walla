@@ -19,11 +19,12 @@
     transform: translate(-50%, -50%);
     left: 50%;
     top: 50%;
-    width: 400px;
+    width: 600px;
     height: 450px;
-    border-radius: 4px;
-    background-color: #ef2d5e;
+    border-radius: 10px;
+    background-color: #1f7eea;
     padding: 10px;
+    margin-top: 10%;
   }
   
   .header {
@@ -35,11 +36,11 @@
     height: 35px;
     width: 120px;
     border-radius: 4px;
-    background-image: linear-gradient(to bottom, rgb(235 222 63), rgb(243 161 5));
+    background-image: linear-gradient(to bottom, rgb(0, 157, 188), rgb(1, 12, 16));
     border: none;
     outline: none;
     color: white;
-    box-shadow: 0 3px 6px #d7a827;
+    box-shadow: 0 3px 6px #00d9ff;
   }
   
   .btn:hover {
@@ -111,5 +112,10 @@
   .loader {
     width: 40px;
     height: 40px;
+  }
+
+  .logoImg{
+    width: max-content;
+    margin: auto;
   }
   

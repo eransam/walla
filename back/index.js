@@ -36,7 +36,7 @@ const validateURL = async (req, res, next) => {
   next();
 };
 
-// מביא את הדף הראשי
+//localhost:8000 מביא את הדף הראשי ב
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
@@ -62,7 +62,7 @@ console.log("test");
 });
 
 
-
+// איפיאי שמביא אותה ללינק המקורי בעת כניסה ללינק המקוצר
 app.get("/:id", async (req, res) => {
   const id = req.params.id;
 
