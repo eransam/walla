@@ -69,6 +69,9 @@ function AddUrl(): JSX.Element {
             </div>
       <div className="container">
         <div className="header">Walla URL shortener</div>
+        <p className="InstructionsText">Instructions:</p>
+        <p>After a real address has been entered and a shortened address has been received, you can also
+            enter the shortened link in the box and receive the real link back</p>
         
                         <form className="form" id="form" onSubmit={handleSubmit(submit)}>
                             {/* <label>url: </label> */}
@@ -83,6 +86,7 @@ function AddUrl(): JSX.Element {
                 <div id="link-wrapper" className="link-wrapper">
                     <h3 className="link-text">Shortened Link</h3>
                     <div id="short-link" className="short-link"></div>
+                    <p>The link above opens a new browser with the requested website</p>
                 </div>
                     <div>
                         
